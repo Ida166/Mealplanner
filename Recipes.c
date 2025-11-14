@@ -37,6 +37,56 @@ Recipe recipes_breakfast[] = {
 int breakfastcount = 10;
 
 Recipe recipes_lunch[] = {
+{"Chicken Stir Fry", 20, 1, 450,
+    {"Chicken breast: 150g", "Mixed veggies: 200g", "Soy sauce: 1 tbsp", "Rice: 100g"},
+    "Cook the chicken, add vegetables, pour soy sauce and serve with rice.",
+    4
+},
+{"Tuna Pasta", 15, 1, 500,
+    {"Pasta: 100g", "Canned tuna: 1 can", "Corn: 50g", "Cream cheese: 1 tbsp"},
+    "Boil pasta, mix with tuna, corn, and cream cheese.",
+    4
+},
+{"Veggie Wrap", 10, 1, 350,
+    {"Tortilla", "Lettuce", "Tomato", "Chicken: 100g"},
+    "Fill tortilla with vegetables and cooked chicken, then roll tightly.",
+    4
+},
+{"Chili Beans", 15, 1, 400,
+    {"Kidney beans: 1 can", "Tomato sauce: 200ml", "Onion", "Spices"},
+    "Heat onion, add beans and tomato sauce, season and simmer.",
+    4
+},
+{"Salmon Bowl", 20, 1, 500,
+    {"Salmon: 150g", "Rice: 100g", "Spinach: 50g", "Lemon"},
+    "Bake salmon, cook rice, add spinach and lemon juice on top.",
+    4
+},
+{"Chicken Caesar Salad", 12, 1, 350,
+    {"Chicken: 120g", "Lettuce", "Croutons", "Caesar dressing: 1 tbsp"},
+    "Cook chicken, add lettuce, croutons and dressing, then toss.",
+    4
+},
+{"Easy Veggie Pasta", 15, 1, 420,
+    {"Pasta: 100g", "Zucchini", "Tomatoes", "Olive oil: 1 tbsp"},
+    "Boil pasta, sauté veggies, mix together with olive oil.",
+    4
+},
+{"Egg Fried Rice", 10, 1, 450,
+    {"Rice: 150g", "Eggs: 2", "Peas: 50g", "Soy sauce: 1 tbsp"},
+    "Scramble eggs, add rice and peas, stir soy sauce through.",
+    4
+},
+{"Chicken Pita", 8, 1, 380,
+    {"Pita bread", "Chicken: 100g", "Lettuce", "Yoghurt dressing"},
+    "Fill pita with chicken, lettuce, and a spoon of yoghurt dressing.",
+    4
+},
+{"Tomato Soup & Toast", 12, 1, 300,
+    {"Tomato soup: 1 can", "Toast", "Cheese"},
+    "Heat soup, toast bread with cheese, serve together.",
+    3
+},
     
 };
 
