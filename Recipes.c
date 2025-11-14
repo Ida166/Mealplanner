@@ -3,13 +3,38 @@
 
 
 Recipe recipes_breakfast[] = {
-    {"Pancakes", 30, 2, 300, {"flour: 200g", "eggs: 1", "milk: 100ml", "sugar"}, "First mix the dry igredients and ad the weat ones. Then heat the pan and cook the pancakes til they are done.", 4},
-    {"Omelette", 30, 1, 350, {"eggs: 2", "milk: 100ml", "salt", "pepper"}, "First mix the ingredients and then cook them on the pan until the eggmass is bakaed", 4},
-    {"Skyr", 5, 1, 350, {"Skyr: 200g", "Fruit", "Oats"}, "First put the skyr in a bowl and add your toppings, fruit and oats", 3},
-    {"Oats", 3, 1, 400, {"Oats: 70g", "Cinnamon", "Apple", "Milk: 200g"}, "First add the oats to a bowl and pour milk in then add choped apples and drissle with cinnamon", 4},
-    {"Toast", 5, 1, 400, {"Toast", "Chease", "Ham"}, "Assemble the toast and grill it if wanted", 3},
+{"Pancakes", 30, 2, 300,
+ {"flour: 200g", "eggs: 1", "milk: 100ml", "sugar"},
+ "Mix dry ingredients, add wet ingredients, then cook on a hot pan.", 4},
+{"Omelette", 30, 1, 350,
+ {"eggs: 2", "milk: 100ml", "salt", "pepper"},
+ "Whisk ingredients together and cook on a pan until firm.", 4},
+{"Skyr", 5, 1, 350,
+ {"Skyr: 200g", "Fruit", "Oats"},
+ "Place skyr in a bowl and add fruit and oats.", 3},
+{"Oats", 3, 1, 400,
+ {"Oats: 70g", "Cinnamon", "Apple", "Milk: 200ml"},
+ "Add oats and milk to a bowl, mix, and top with apple and cinnamon.", 4},
+{"Toast", 5, 1, 400,
+ {"Toast", "Cheese", "Ham"},
+ "Assemble the toast and grill if desired.", 3},
+{"Yoghurt", 5, 1, 400,
+ {"Yoghurt: 200g", "Fruit", "Oats"},
+ "Add yoghurt to a bowl and top with fruit and oats.", 3},
+{"Scrambled Eggs", 10, 1, 250,
+ {"Eggs: 2", "Butter: 10g", "Salt", "Pepper"},
+ "Whisk eggs, melt butter in pan, and cook while stirring gently.", 4},
+{"Banana Smoothie", 5, 1, 280,
+ {"Banana: 1", "Milk: 200ml", "Oats: 30g"},
+ "Blend banana, milk, and oats until smooth.", 3},
+{"Avocado Toast", 7, 1, 320,
+ {"Toast", "Avocado: 1", "Salt", "Lemon juice"},
+ "Mash avocado, spread on toast, and season with salt and lemon.", 4},
+{"Fruit Bowl", 5, 1, 220,
+ {"Apple", "Banana", "Grapes", "Strawberries"},
+ "Chop fruit and mix in a bowl.", 4}
 };
-int breakfastcount = 2;
+int breakfastcount = 10;
 
 Recipe recipes_lunch[] = {
     
@@ -33,5 +58,6 @@ void print_breakfast_recipes(void){
             printf("- %s\n", current.ingredient[j]);
         }
         printf("Procedure: %s\n", current.procedure);
+        printf("\n");
     }
 }
