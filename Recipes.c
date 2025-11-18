@@ -91,7 +91,56 @@ Recipe recipes_lunch[] = {
 };
 
 Recipe recipes_dinner[] = {
-    
+{"One-Pot Chicken Pasta", 20, 1, 480,
+    {"Pasta: 100g", "Chicken: 120g", "Cherry tomatoes: 100g", "Spinach: 50g", "Cream cheese: 1 tbsp"},
+    "Cook chicken, add pasta, tomatoes and water. Simmer until pasta is done, stir in cream cheese and spinach.",
+    4
+},
+{"Bean & Veggie Burrito", 12, 1, 420,
+    {"Tortilla", "Black beans: 1 can", "Corn: 50g", "Rice: 80g", "Salsa"},
+    "Heat beans with corn, add cooked rice, wrap in tortilla with salsa.",
+    4
+},
+{"Quick Chicken Curry", 18, 1, 450,
+    {"Chicken: 150g", "Curry paste: 1 tbsp", "Coconut milk: 150ml", "Frozen veggies: 150g"},
+    "Cook chicken, add curry paste, pour coconut milk, add veggies and simmer.",
+    4
+},
+{"Omelette Bowl", 10, 1, 350,
+    {"Eggs: 3", "Spinach: 50g", "Tomatoes", "Cheese: 20g"},
+    "Whisk eggs, cook with spinach and tomatoes, add cheese before folding.",
+    3
+},
+{"Fast Salmon Pasta", 15, 1, 500,
+    {"Pasta: 100g", "Smoked salmon: 80g", "Cream cheese: 1 tbsp", "Lemon", "Peas: 50g"},
+    "Boil pasta, mix with peas, cream cheese and salmon. Add lemon.",
+    4
+},
+{"Turkey Chili", 20, 1, 470,
+    {"Ground turkey: 150g", "Kidney beans: 1 can", "Tomato sauce: 200ml", "Chili spices"},
+    "Cook turkey, add beans, tomato sauce and spices, simmer.",
+    4
+},
+{"Veggie Stir Fry Noodles", 12, 1, 420,
+    {"Noodles: 100g", "Frozen stir-fry veggies: 200g", "Soy sauce: 1 tbsp", "Egg: 1"},
+    "Cook noodles, fry veggies, add egg, mix everything with soy sauce.",
+    4
+},
+{"Baked Potato Bowl", 15, 1, 390,
+    {"Potato: 1 large", "Cottage cheese: 100g", "Corn: 50g", "Spring onion"},
+    "Microwave potato, top with cottage cheese, corn and chopped spring onion.",
+    3
+},
+{"Tuna Rice Bowl", 10, 1, 430,
+    {"Rice: 150g", "Canned tuna: 1 can", "Soy sauce: 1 tsp", "Cucumber", "Mayo: 1 tsp"},
+    "Mix rice with tuna, soy sauce, mayo and diced cucumber.",
+    4
+},
+{"Vegetarian Lentil Stew", 18, 1, 400,
+    {"Red lentils: 100g", "Carrots", "Onion", "Vegetable broth: 300ml"},
+    "Cook onion and carrot, add lentils and broth, simmer until thick.",
+    4
+}
 };
 
 
