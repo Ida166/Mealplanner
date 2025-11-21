@@ -149,10 +149,15 @@ int dinnercount = 10;
 
 
 
-void print_recipes(Recipe arr[],int size,Node *IngredienList){
+void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
 
     printf("\n");
+    int index = 0;
     Node* IngredienListStartPoint = IngredienList;
+
+
+    int results[10];
+
     for(int i = 0; i < size; i++){
         Recipe current = arr[i]; //variable of type Recipe named current storing the current breakfast recipe
 
@@ -161,6 +166,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList){
         //Check each ingredient
         IngredienList = IngredienListStartPoint;
         while(IngredienList != NULL){
+
             //printf("%s\n",IngredienList->ingredient);
             if (hasIngredient(current,IngredienList->ingredient)){
                 shouldAddToList = 1;
@@ -171,19 +177,27 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList){
 
         if (shouldAddToList){
 
-            printf("Recipe: %s\n", current.name);
-            printf("Time: %d\n", current.time);
-            printf("Portions: %d\n", current.portion);
-            printf("Calories: %d\n", current.calories);
-            printf("Ingredients:\n");
+            printf("[%d]... Recipe: %s\n",index, current.name);
+            printf("       Time: %d\n", current.time);
+            printf("       Portions: %d\n", current.portion);
+            printf("       Calories: %d\n", current.calories);
+            printf("       Ingredients:\n");
             for(int j = 0; j < current.ingredient_count; j++){
-                printf("- %s\n", current.ingredient[j]);
+                printf("       - %s\n", current.ingredient[j]);
             }
-            printf("Procedure: %s\n", current.procedure);
+            printf("       Procedure: %s\n", current.procedure);
             printf("\n");
-
+            results[index] = i;
+            index++;
         }
     }
+
+    printf("\nVaelg ret...");
+    int option = 0;
+    scanf(" %d",&option);
+    *result = results[option];
+
+
 }
 
 int hasIngredient(Recipe targetRecipe,char target[]){
@@ -191,8 +205,24 @@ int hasIngredient(Recipe targetRecipe,char target[]){
     int i = 0;
     //printf("%s %s",target,targetRecipe.ingredient[i])
     while (i < targetRecipe.ingredient_count){
-        //printf("%s %s\n",target,targetRecipe.ingredient[i]);
-        if (strcmp(target,targetRecipe.ingredient[i]) == 0){
+
+        char searchString[Max_Ingredient_name];
+
+        int index = 0;
+        int charsToCopy = sizeof(targetRecipe.ingredient[i])/sizeof(targetRecipe.ingredient[i][0]);
+
+        while (targetRecipe.ingredient[i][index] != '\0'){
+            if (targetRecipe.ingredient[i][index] == ':'){
+                charsToCopy = index;
+                break;
+            }
+            index++;
+        }
+        strncpy(searchString,targetRecipe.ingredient[i],charsToCopy);
+        searchString[charsToCopy] = '\0';
+        capitalize(searchString);
+
+        if (strcmp(target,searchString) == 0){
             return 1;
         }
         i++;

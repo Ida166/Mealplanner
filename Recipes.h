@@ -28,7 +28,7 @@ extern int lunchcount;
 extern Recipe recipes_dinner[];
 extern int dinnercount;
 
-void print_recipes(Recipe arr[],int size,Node *IngredienList);
+void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result);
 int hasIngredient(Recipe targetRecipe,char target[]);
 
 #endif
