@@ -9,7 +9,7 @@
 //En struct er en datatype man selv kan definere
 
 
-int IngrediensIndtast_mainFunction(void)
+Node* IngrediensIndtast_mainFunction()
 {
     Node *head = NULL; //Declares a pointer head der peger på en node struct. NULL initilieres den til så den ikke peger et sted hen endnu.
     char ingrediens_input[50];
@@ -26,13 +26,11 @@ int IngrediensIndtast_mainFunction(void)
         head = tilfoj_ingrediens_til_liste(ingrediens_input, head);
     }
 
-    //Print listen
-    print_list(head);
-
+    return head;
     //Frigørelse a hukommelse
-    free_list(head);
+    //free_list(head);
 
-    return 0;
+    //return 0;
 }
 
 //char *ingrediens_input gives som en pointer da man ikke kan passere en hel array ind så dergor giver vi adressen til starten af arrayen

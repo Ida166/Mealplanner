@@ -1,3 +1,6 @@
+//
+#include "IngrediensIndtast.h"
+
 #ifndef RECIPES_H
 #define RECIPES_H
 
@@ -20,7 +23,12 @@ typedef struct{
 // Declare the array for other files
 extern Recipe recipes_breakfast[];
 extern int breakfastcount;
+extern Recipe recipes_lunch[];
+extern int lunchcount;
+extern Recipe recipes_dinner[];
+extern int dinnercount;
 
-void print_breakfast_recipes(void);
+void print_recipes(Recipe arr[],int size,Node *IngredienList);
+int hasIngredient(Recipe targetRecipe,char target[]);
 
 #endif

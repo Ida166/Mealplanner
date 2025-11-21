@@ -1,6 +1,7 @@
 #include "Recipes.h"
 #include <stdio.h>
-
+#include <string.h>
+#include "IngrediensIndtast.h"
 
 Recipe recipes_breakfast[] = {
 {"Pancakes", 30, 2, 300,
@@ -86,9 +87,9 @@ Recipe recipes_lunch[] = {
     {"Tomato soup: 1 can", "Toast", "Cheese"},
     "Heat soup, toast bread with cheese, serve together.",
     3
-},
-    
+},    
 };
+int lunchcount = 10;
 
 Recipe recipes_dinner[] = {
 {"One-Pot Chicken Pasta", 20, 1, 480,
@@ -142,21 +143,60 @@ Recipe recipes_dinner[] = {
     4
 }
 };
-
+int dinnercount = 10;
 
 //function to print all recepies
-void print_breakfast_recipes(void){
-    for(int i = 0; i < breakfastcount; i++){
-        Recipe current = recipes_breakfast[i]; //variable of type Recipe named current storing the current breakfast recipe
-        printf("Recipe: %s\n", current.name);
-        printf("Time: %d\n", current.time);
-        printf("Portions: %d\n", current.portion);
-        printf("Calories: %d\n", current.calories);
-        printf("Ingredients:\n");
-        for(int j = 0; j < current.ingredient_count; j++){
-            printf("- %s\n", current.ingredient[j]);
+
+
+
+void print_recipes(Recipe arr[],int size,Node *IngredienList){
+
+    printf("\n");
+    Node* IngredienListStartPoint = IngredienList;
+    for(int i = 0; i < size; i++){
+        Recipe current = arr[i]; //variable of type Recipe named current storing the current breakfast recipe
+
+        int shouldAddToList = 0;
+
+        //Check each ingredient
+        IngredienList = IngredienListStartPoint;
+        while(IngredienList != NULL){
+            //printf("%s\n",IngredienList->ingredient);
+            if (hasIngredient(current,IngredienList->ingredient)){
+                shouldAddToList = 1;
+                //break;
+            }
+            IngredienList = IngredienList->next;
         }
-        printf("Procedure: %s\n", current.procedure);
-        printf("\n");
+
+        if (shouldAddToList){
+
+            printf("Recipe: %s\n", current.name);
+            printf("Time: %d\n", current.time);
+            printf("Portions: %d\n", current.portion);
+            printf("Calories: %d\n", current.calories);
+            printf("Ingredients:\n");
+            for(int j = 0; j < current.ingredient_count; j++){
+                printf("- %s\n", current.ingredient[j]);
+            }
+            printf("Procedure: %s\n", current.procedure);
+            printf("\n");
+
+        }
     }
+}
+
+int hasIngredient(Recipe targetRecipe,char target[]){
+
+    int i = 0;
+    //printf("%s %s",target,targetRecipe.ingredient[i])
+    while (i < targetRecipe.ingredient_count){
+        //printf("%s %s\n",target,targetRecipe.ingredient[i]);
+        if (strcmp(target,targetRecipe.ingredient[i]) == 0){
+            return 1;
+        }
+        i++;
+    }
+
+    return 0;
 }
