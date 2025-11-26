@@ -151,6 +151,7 @@ int dinnercount = 10;
 
 void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
 
+    //Start new line
     printf("\n");
     int index = 0;
     Node* IngredienListStartPoint = IngredienList;
@@ -166,15 +167,16 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
         //Check each ingredient
         IngredienList = IngredienListStartPoint;
         while(IngredienList != NULL){
-
-            //printf("%s\n",IngredienList->ingredient);
+            //If recipes has ingredient then add it to the list
             if (hasIngredient(current,IngredienList->ingredient)){
                 shouldAddToList = 1;
-                //break;
+                break;
             }
+            //Go to the next ingredient if the check failed
             IngredienList = IngredienList->next;
         }
 
+        //Print the recipe if the ingredients matched
         if (shouldAddToList){
 
             printf("[%d]... Recipe: %s\n",index, current.name);
@@ -203,14 +205,18 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
 int hasIngredient(Recipe targetRecipe,char target[]){
 
     int i = 0;
-    //printf("%s %s",target,targetRecipe.ingredient[i])
+
+    //Check through every ingredient
     while (i < targetRecipe.ingredient_count){
+
+        //Get the string up until ':' and compare that to the search result
 
         char searchString[Max_Ingredient_name];
 
         int index = 0;
+        //Check how many characters are in the original ingredient string
         int charsToCopy = sizeof(targetRecipe.ingredient[i])/sizeof(targetRecipe.ingredient[i][0]);
-
+        //Iterate through the string until it either finds '\0' or ':'
         while (targetRecipe.ingredient[i][index] != '\0'){
             if (targetRecipe.ingredient[i][index] == ':'){
                 charsToCopy = index;
@@ -218,10 +224,14 @@ int hasIngredient(Recipe targetRecipe,char target[]){
             }
             index++;
         }
+
+        //Copy the ingredient string onto searchString but only up to ':' if there was any
+
         strncpy(searchString,targetRecipe.ingredient[i],charsToCopy);
         searchString[charsToCopy] = '\0';
         capitalize(searchString);
 
+        //Now compare that string with the original one
         if (strcmp(target,searchString) == 0){
             return 1;
         }
