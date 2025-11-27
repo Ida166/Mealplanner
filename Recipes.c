@@ -149,7 +149,7 @@ int dinnercount = 10;
 
 
 
-void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
+void print_recipes(Recipe arr[],int size,Node *IngredienList, int (*result)[7]){
 
     //Start new line
     printf("\n");
@@ -197,9 +197,9 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
     printf("\nVaelg ret...");
     int option = 0;
     scanf(" %d",&option);
-    *result = results[option];
+    *result[0] = results[option];
 
-
+    // index integer op til 7 eller indtil brugeren skriver done (også skal den selv udfylde resten med de valg brugeren har valgt)
 }
 
 int hasIngredient(Recipe targetRecipe,char target[]){
