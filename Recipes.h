@@ -17,6 +17,7 @@ typedef struct{
     char ingredient[Max_Ingredients][Max_Ingredient_name];
     char procedure[Max_Procedure_Length];
     int ingredient_count;  // number of ingredients used
+    int dietPreference[5];
 }Recipe;
 
 
@@ -28,7 +29,12 @@ extern int lunchcount;
 extern Recipe recipes_dinner[];
 extern int dinnercount;
 
+<<<<<<< Updated upstream
 void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result);
+=======
+void print_recipes(Recipe arr[],int size,Node *IngredienList, int (*result)[7]);
+int hasPreference(Recipe targetRecipe, int pref);
+>>>>>>> Stashed changes
 int hasIngredient(Recipe targetRecipe,char target[]);
 
 #endif
