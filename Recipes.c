@@ -1,5 +1,6 @@
 #include "Recipes.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "IngrediensIndtast.h"
 #include "KostPreference.h"
@@ -150,13 +151,12 @@ int dinnercount = 10;
 
 
 
-void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
+void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
 
     //Start new line
     printf("\n");
     int index = 0;
     Node* IngredienListStartPoint = IngredienList;
-
 
     int results[10];
 
@@ -204,15 +204,50 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result){
         }
     }
 
-    printf("\nVaelg ret...");
-    int option = 0;
-    scanf(" %d",&option);
-    *result = results[option];
+    printf("\nVaelg retter...(Indtast 'exit' for at afslutte)\n");
+    int option;
+    int arrayIndex = 0;
+    
+    char *p, s[100];
+    //Få fat på brugerens input via fgets
+    while(fgets(s,sizeof(s),stdin) && arrayIndex < 7){
+
+        //Check om brugerens er "done"
+        char inputText[100];
+        strcpy(inputText,s);
+
+        inputText[strlen(inputText)-1] = '\0';
+
+        char compareText[] = "exit";
+        int compResult = strcmp(inputText,compareText);
+
+        if (compResult == 0){
+            break;
+        }
+
+
+        //Inputtet var ikke "done", så converter s til et int
+        option = strtol(s, &p, 10);
+
+
+        //TODO: Uddyb hvad der sker i den første del a checket
+        if (p == s || *p != '\n'){
+            printf("Ikke et valid input\n");
+        } else {
+            result[arrayIndex] = results[option];
+            arrayIndex++;
+        }
+    }
+
+
+
 
 
 }
 
 int hasPreference(Recipe targetRecipe, int pref){
+
+    //Udregner størrelsen af dietPreference arrayet
     int arrSize = sizeof(targetRecipe.dietPreference)/sizeof(targetRecipe.dietPreference[0]);
     for (int i = 0; i < arrSize;i++){
         if (targetRecipe.dietPreference[i] == pref){

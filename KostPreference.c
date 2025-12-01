@@ -45,6 +45,8 @@ void listOptions() {
 		//Inputtet var ikke "done", så converter s til et int
 		optionSelect = strtol(s, &p, 10);
 
+
+		//TODO: Uddyb hvad der sker i den første del a checket
 		if (p == s || *p != '\n' || !(optionSelect >= 0 && optionSelect < dietPreferenceAmount)){
 			printf("Ikke et valid input\n");
 		} else break;

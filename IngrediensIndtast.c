@@ -9,12 +9,14 @@
 //En struct er en datatype man selv kan definere
 
 
-Node* IngrediensIndtast_mainFunction()
+Node* IngrediensIndtast_mainFunction(char hint[])
 {
     Node *head = NULL; //Declares a pointer head der peger på en node struct. NULL initilieres den til så den ikke peger et sted hen endnu.
     char ingrediens_input[50];
 
     //promt brugeren for ingredienser og gem dem i en liste.
+
+    printf("Indtast en ingredienser for %s (Indtast 'exit' for at afslutte)\n",hint);
     while(1)
     {
         get_ingredient(ingrediens_input);
@@ -56,8 +58,7 @@ Node* tilfoj_ingrediens_til_liste(char *ingrediens_input, Node *head){
 }
 
 void get_ingredient(char *ingrediens_input){
-    
-    printf("Indtast en ingrediens('exit' for at afslutte): ");
+
     //begrænser mængden af char's som kan blive sannet ind til at passe med størrelsen på vores array
     scanf("%49s", ingrediens_input);
 }
