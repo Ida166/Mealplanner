@@ -29,12 +29,8 @@ extern int lunchcount;
 extern Recipe recipes_dinner[];
 extern int dinnercount;
 
-<<<<<<< Updated upstream
 void print_recipes(Recipe arr[],int size,Node *IngredienList, int *result);
-=======
-void print_recipes(Recipe arr[],int size,Node *IngredienList, int (*result)[7]);
 int hasPreference(Recipe targetRecipe, int pref);
->>>>>>> Stashed changes
 int hasIngredient(Recipe targetRecipe,char target[]);
 
 #endif
