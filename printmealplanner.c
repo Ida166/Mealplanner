@@ -4,7 +4,7 @@
 
 int print_mealplan(int breakfastResultArray[7], int lunchResultArray[7], int dinnerResultArray[7]){
     //åbner filen
-    FILE *f = fopen("printmeal.csv", "w");
+    FILE *f = fopen("printmealplanner.csv", "w");
     if (!f){
         printf("Could not open file for writing.\n");
         return 1;
