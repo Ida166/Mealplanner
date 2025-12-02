@@ -2,6 +2,7 @@
 #include "IngrediensIndtast.h"
 #include "KostPreference.h"
 #include "Recipes.h"
+#include "printmealplanner.h"
 
 void fill_schedule(int Arr[7]);
 
@@ -52,6 +53,9 @@ int main(){
         printf("%s\n",recipes_dinner[DinnerResultArray[i]].name);
         printf("\n");
     }
+
+    print_mealplan(BreakfastResultArray,LunchResultArray,DinnerResultArray);
+
     free_list(IngredientsBreakfast);
     free_list(IngredientsLunch);
     free_list(IngredientsDinner);
@@ -69,6 +73,4 @@ void fill_schedule(int Arr[7]){
         }
         i++;
     }
-
-
 }

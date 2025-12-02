@@ -1,0 +1,1 @@
+int print_mealplan(int breakfastResultArray[7], int lunchResultArray[7], int dinnerResultArray[7]);
