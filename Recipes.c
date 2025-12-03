@@ -166,9 +166,20 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
         int shouldAddToList = 0;
 
         //Check Diet Preference
-        if (User_Diet_Preference != ALL){
-            if (!hasPreference(current,User_Diet_Preference)){
-                shouldAddToList--;
+        if (userDietCount > 0){
+
+            int match = 0;
+
+            for(int d = 0; d < userDietCount; d++){
+                int pref = userDietChoices[d];
+
+                if (hasPreference(current, pref)){
+                    match = 1;
+                    break;
+                }
+            }
+            if (!match) {
+                shouldAddToList = -1;
             }
         }
 
