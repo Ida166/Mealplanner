@@ -29,6 +29,12 @@ void listOptions() {
 	printf("Options: 0 = All, 1 = Vegetarian, 2 = Vegan\n");
 
 	while(1){
+		// Check if max choices reached
+		if (userDietCount >= MAX_DIET_CHOICES) {
+			printf("Maximum number of diet choices reached.\n");
+			break;  // exit the loop immediately
+		}
+
 		printf("Enter choice: ");
 
 		//Få fat på brugerens input via fgets
@@ -55,16 +61,19 @@ void listOptions() {
 			continue;
 		}
 
-		// Store value in array
-		if (userDietCount < MAX_DIET_CHOICES) {
-			userDietChoices[userDietCount++] = value;
-			printf("Added %s\n", optionNames[value]);
-		} else {
-			printf("Maximum number of diet choices reached\n");
+		// If "All" is selected, stop immediately
+		if (value == ALL) {
+			userDietChoices[0] = ALL;
+			userDietCount = 1;
+			printf("All diets selected. ");
 			break;
 		}
-		
-	}
 
-	printf("\nDiet selection complete.\n\n");
+		// Store value in array
+		userDietChoices[userDietCount++] = value;
+		printf("Added %s\n", optionNames[value]);
+			
+		}
+
+	printf("Diet selection complete.\n\n");
 }

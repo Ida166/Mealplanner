@@ -9,7 +9,7 @@ typedef enum Diet_Prefs {
 } Diet_Preference;
 
 // Max allowed user selections
-#define MAX_DIET_CHOICES 5
+#define MAX_DIET_CHOICES 3
 
 // Global variables (shared across .c files)
 extern int userDietChoices[MAX_DIET_CHOICES];
