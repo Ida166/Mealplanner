@@ -44,7 +44,7 @@ void listOptions() {
 		if (strcmp(input, "exit") == 0) { // if the user have typed exit it will break out of the loop
 			break;
 		}
-		
+
 		// Convert to integer
 		char *p; 
 		int value = strtol(s, &p, 10);
@@ -61,6 +61,7 @@ void listOptions() {
 			printf("Added %s\n", optionNames[value]);
 		} else {
 			printf("Maximum number of diet choices reached\n");
+			break;
 		}
 		
 	}
