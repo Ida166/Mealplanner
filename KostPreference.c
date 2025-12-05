@@ -3,57 +3,77 @@
 #include <string.h>
 #include "KostPreference.h"
 
-Diet_Preference User_Diet_Preference = ALL;
+//This array stores each diet preference the user selects fx [1, 2, ...]
+int userDietChoices[MAX_DIET_CHOICES];
+//This integer stores how many preferences the user has chosen
+int userDietCount = 0;
 
 //Laver et seperat array til at give indexene navne. Vi kan muligvis lave options om til et struct
 
 int dietPreferenceAmount = 3;
 
 char optionNames[3][10] = {
-	"Alle",
-	"Vegetar",
+	"All",
+	"Vegetarian",
 	"Vegan"
 };
 
 
 void listOptions() {
 
+	char s[100];
+	char input[100];
+
 	//Print intro text
-	printf("Vaelg kost praeference.\n");
+	printf("Choose diet preferences (type 'exit' when done)\n");
+	printf("Options: 0 = All, 1 = Vegetarian, 2 = Vegan\n");
 
-	printf("\n");
+	while(1){
+		// Check if max choices reached
+		if (userDietCount >= MAX_DIET_CHOICES) {
+			printf("Maximum number of diet choices reached.\n");
+			break;  // exit the loop immediately
+		}
 
-	//Print mulighederne
-	for (int i = 0; i < dietPreferenceAmount;i++){
-		printf("[%d]... %s\n",i,optionNames[i]);
-	}
+		printf("Enter choice: ");
 
-	int optionSelect;
-	
-	char *p, s[100];
-	//Få fat på brugerens input via fgets
-	while(fgets(s,sizeof(s),stdin)){
+		//Få fat på brugerens input via fgets
+		if(!fgets(s,sizeof(s),stdin)){
+			continue;
+		}
 
-		//Check om brugerens er "done"
-		char inputText[100];
-		strcpy(inputText,s);
-		inputText[strlen(inputText)-1] = '\0';
+		// Make copy without newline
+		strcpy(input, s); //copies input into s
+		input[strcspn(input, "\n")] = '\0';
 
-		char compareText[] = "done";
-		int result = strcmp(inputText,compareText);
+		// Check for exit
+		if (strcmp(input, "exit") == 0) { // if the user have typed exit it will break out of the loop
+			break;
+		}
 
-		//Inputtet var ikke "done", så converter s til et int
-		optionSelect = strtol(s, &p, 10);
+		// Convert to integer
+		char *p; 
+		int value = strtol(s, &p, 10);
 
+		// Validate input
+		if (p == s || *p != '\n' || value < 0 || value >= dietPreferenceAmount) {
+			printf("Invalid input\n");
+			continue;
+		}
 
-		//TODO: Uddyb hvad der sker i den første del a checket
-		if (p == s || *p != '\n' || !(optionSelect >= 0 && optionSelect < dietPreferenceAmount)){
-			printf("Ikke et valid input\n");
-		} else break;
-	}
+		// If "All" is selected, stop immediately
+		if (value == ALL) {
+			userDietChoices[0] = ALL;
+			userDietCount = 1;
+			printf("All diets selected. ");
+			break;
+		}
 
-	//Sæt indstillings værdi
-	User_Diet_Preference = optionSelect;
+		// Store value in array
+		userDietChoices[userDietCount++] = value;
+		printf("Added %s\n", optionNames[value]);
+			
+		}
 
-	printf("\n");
+	printf("Diet selection complete.\n\n");
 }

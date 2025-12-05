@@ -54,7 +54,7 @@ int main(){
         printf("\n");
     }
 
-    print_mealplan(BreakfastResultArray,LunchResultArray,DinnerResultArray);
+    print_mealplan(BreakfastResultArray, LunchResultArray, DinnerResultArray);
 
     free_list(IngredientsBreakfast);
     free_list(IngredientsLunch);
