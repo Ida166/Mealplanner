@@ -73,6 +73,4 @@ void fill_schedule(int Arr[7]){
         }
         i++;
     }
-
-
 }
