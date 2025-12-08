@@ -21,11 +21,16 @@ Node* IngrediensIndtast_mainFunction(char hint[])
     {
         get_ingredient(ingrediens_input);
         if(strcmp(ingrediens_input, "exit") == 0){
+            if (head == NULL){
+                printf("[Fejl] - Ingen ingredienser er indstatet.\n\n");
+            } else{
             break;
-        }
-        
+            }
+        } else{
         capitalize(ingrediens_input);
         head = tilfoj_ingrediens_til_liste(ingrediens_input, head);
+
+    }
     }
 
     return head;
