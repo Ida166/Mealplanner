@@ -149,8 +149,6 @@ int dinnercount = 10;
 
 //function to print [] recepies
 
-
-
 void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
 
     //Start new line
@@ -158,7 +156,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
     int index = 0;
     Node* IngredienListStartPoint = IngredienList;
 
-    int results[10];
+    int results[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
     for(int i = 0; i < size; i++){
         Recipe current = arr[i]; //variable of type Recipe named current storing the current breakfast recipe
@@ -199,8 +197,82 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
 
         //Print the recipe if the ingredients matched
         if (shouldAddToList > 0){
+            printf("%d\n",i);
+            results[index] = i;
+            index++;
+        }
+    }
 
-            printf("[%d]... Recipe: %s\n",index, current.name);
+    if (results[0] == -1){
+        printf("Ingen retter kunne genereres... Vil du generere nogle tilfaeldige retter? Y/N\n");
+        
+        while(1){
+            char answear;
+            scanf(" %c",&answear);
+            if (answear == 'Y'){
+
+                int maxSuggestions = 0;
+
+                //Get max avilable options
+                for(int i = 0; i < size; i++){
+                    for (int j=0;j < userDietCount;j++)
+                        if (hasPreference(arr[i], userDietChoices[j])){
+                            maxSuggestions++;
+                            break;
+                    }
+                    if (maxSuggestions >= 7){
+                        break;
+                    }
+                }
+
+                //If not, then default it to 7
+                if (maxSuggestions == 0){
+                    maxSuggestions = 7;
+                }
+
+                for (int i = 0; i < maxSuggestions;i++){
+
+                    int preferenceValid = 0;
+                    int ranIndex;
+                    while (!preferenceValid){
+                        ranIndex = rand()%size;
+                        if (userDietCount > 0){
+
+                            for(int j = 0; j < userDietCount; j++){
+                                if (hasPreference(arr[ranIndex], userDietChoices[j])){
+                                    if (!arrayHasValue(ranIndex,results,10))
+                                    {
+                                        preferenceValid = 1;
+                                        break;
+                                    }
+                                }
+                            }
+
+                        } else {
+                            if (!arrayHasValue(ranIndex,results,10)){
+                               preferenceValid = 1;
+                            }
+                        }
+
+                    }
+                    results[i] = ranIndex;
+                }
+                break;
+            }
+            if (answear == 'N'){
+                return;
+            }
+            else{
+                printf("Invalid");
+            }
+        }
+    }
+
+    int recipesIndex = 0;
+    for (int i = 0;i<10;i++){
+        if (results[i] != -1){
+            Recipe current = arr[results[i]];
+            printf("[%d]... Recipe: %s\n",recipesIndex, current.name);
             printf("       Time: %d\n", current.time);
             printf("       Portions: %d\n", current.portion);
             printf("       Calories: %d\n", current.calories);
@@ -210,8 +282,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
             }
             printf("       Procedure: %s\n", current.procedure);
             printf("\n");
-            results[index] = i;
-            index++;
+            recipesIndex++;
         }
     }
 
@@ -305,5 +376,15 @@ int hasIngredient(Recipe targetRecipe,char target[]){
         i++;
     }
 
+    return 0;
+}
+
+int arrayHasValue(int value,int arr[],int size){
+    int i;
+    for(i = 0; i < size; i++){
+        if(arr[i] == value){
+            return 1;
+        }
+    }
     return 0;
 }

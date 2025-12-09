@@ -16,10 +16,15 @@ int main(){
     //Create a new ingredient list
     Node *IngredientsBreakfast = NULL;
     //Run the ingredient input function to fill out the list
-    IngredientsBreakfast = IngrediensIndtast_mainFunction("Morgenmad");
-    //Print the recipes based on the ingredients
-    //Also get the user input and set breakfast result to that
-    print_recipes(recipes_breakfast,10,IngredientsBreakfast,BreakfastResultArray);
+    while(1){
+        IngredientsBreakfast = IngrediensIndtast_mainFunction("Morgenmad");
+        //Print the recipes based on the ingredients
+        //Also get the user input and set breakfast result to that
+        print_recipes(recipes_breakfast,10,IngredientsBreakfast,BreakfastResultArray);
+        if (BreakfastResultArray[0] != -1){
+            break;
+        }
+    }
 
     printf("\n");
     //Now repeat for lunch and dinner (This could be a for loop frankly)
@@ -27,17 +32,26 @@ int main(){
     int LunchResult = 0;
     int LunchResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
     Node *IngredientsLunch = NULL;
-    IngredientsLunch = IngrediensIndtast_mainFunction("Frokost");
-    print_recipes(recipes_lunch,10,IngredientsLunch,LunchResultArray);
+    while(1){
+        IngredientsLunch = IngrediensIndtast_mainFunction("Frokost");
+        print_recipes(recipes_lunch,10,IngredientsLunch,LunchResultArray);
+        if (LunchResultArray[0] != -1){
+            break;
+        }
+    }
 
     printf("\n");
 
     int DinnerResult = 0;
     int DinnerResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
     Node *IngredientsDinner = NULL;
-    IngredientsDinner = IngrediensIndtast_mainFunction("Aftensmad");
-    print_recipes(recipes_dinner,10,IngredientsDinner,DinnerResultArray);
-
+    while(1){    
+        IngredientsDinner = IngrediensIndtast_mainFunction("Aftensmad");
+        print_recipes(recipes_dinner,10,IngredientsDinner,DinnerResultArray);
+        if (DinnerResultArray[0] != -1){
+            break;
+        }
+    }
     printf("\n");
 
     fill_schedule(BreakfastResultArray);

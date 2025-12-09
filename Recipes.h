@@ -32,5 +32,6 @@ extern int dinnercount;
 void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]);
 int hasPreference(Recipe targetRecipe, int pref);
 int hasIngredient(Recipe targetRecipe,char target[]);
+int arrayHasValue(int value,int arr[],int size);
 
 #endif
