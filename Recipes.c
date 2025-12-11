@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "IngrediensIndtast.h"
 #include "KostPreference.h"
 
@@ -197,14 +198,14 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
 
         //Print the recipe if the ingredients matched
         if (shouldAddToList > 0){
-            printf("%d\n",i);
+            //printf("%d\n",i); // Why is this here?
             results[index] = i;
             index++;
         }
     }
 
     if (results[0] == -1){
-        printf("Ingen retter kunne genereres... Vil du generere nogle tilfaeldige retter? Y/N\n");
+        printf("No recipes cpuld be generated, would you want randomly generated resipe options? Write Y for yes and N for no\n");
         
         while(1){
             char answear;
@@ -263,11 +264,12 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
                 return;
             }
             else{
-                printf("Invalid");
+                printf("Invalid input, please type N for no or Y for yes.");
             }
         }
     }
 
+    printf("You can choose the following recipes: \n");
     int recipesIndex = 0;
     for (int i = 0;i<10;i++){
         if (results[i] != -1){
@@ -286,7 +288,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
         }
     }
 
-    printf("\nVaelg retter...(Indtast 'exit' for at afslutte)\n");
+    printf("\nType in the number of the recipe to choose it (Type 'exit' when you are finiched)\n");
     int option;
     int arrayIndex = 0;
     
@@ -294,7 +296,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
     //Få fat på brugerens input via fgets
     while(fgets(s,sizeof(s),stdin) && arrayIndex < 7){
 
-        //Check om brugerens er "done"
+        //Check om brugeren er "done"
         char inputText[100];
         strcpy(inputText,s);
 
@@ -309,22 +311,19 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
 
 
         //Inputtet var ikke "done", så converter s til et int
-        option = strtol(s, &p, 10);
+        option = strtol(s, &p, 10); // Convert input string to integer, p points to first non-number char
 
+        while (isspace((unsigned char)*p)) {  // Skip any whitespace like '\n', '\r', ' '
+            p++;
+        }
 
-        //TODO: Uddyb hvad der sker i den første del a checket
-        if (p == s || *p != '\n'){
-            printf("Ikke et valid input\n");
+        if (p == s || *p != '\0'){ // If no number was read or extra characters remain = invalid
+            printf("Not a valid input, please type in the number of a recipe or exit when you are doene choosing recipes.\n");
         } else {
-            result[arrayIndex] = results[option];
+            result[arrayIndex] = results[option]; // Store selected recipe
             arrayIndex++;
         }
     }
-
-
-
-
-
 }
 
 int hasPreference(Recipe targetRecipe, int pref){
@@ -364,7 +363,6 @@ int hasIngredient(Recipe targetRecipe,char target[]){
         }
 
         //Copy the ingredient string onto searchString but only up to ':' if there was any
-
         strncpy(searchString,targetRecipe.ingredient[i],charsToCopy);
         searchString[charsToCopy] = '\0';
         capitalize(searchString);

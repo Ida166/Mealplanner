@@ -25,8 +25,8 @@ void listOptions() {
 	char input[100];
 
 	//Print intro text
-	printf("Choose diet preferences (type 'exit' when done)\n");
-	printf("Options: 0 = All, 1 = Vegetarian, 2 = Vegan\n");
+	printf("Choose the diet preferences you would like one at a time (type 'exit' when done)\n");
+	printf("Your optiens are: type 0 for All, type 1 for Vegetarian, and type 2 for Vegan\n");
 
 	while(1){
 		// Check if max choices reached
@@ -35,9 +35,9 @@ void listOptions() {
 			break;  // exit the loop immediately
 		}
 
-		printf("Enter choice: ");
+		printf("\nEnter your choosen diet prference or type exit: ");
 
-		//Få fat på brugerens input via fgets
+		//Få fat på brugerens input via fgets 
 		if(!fgets(s,sizeof(s),stdin)){
 			continue;
 		}

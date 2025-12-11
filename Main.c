@@ -8,7 +8,7 @@ void fill_schedule(int Arr[7]);
 
 int main(){
 
-    printf("\nVelkommen til meal plan programmet!\n\n");
+    printf("\nVelcome to the meal plan program!\n\n");
     listOptions();
 
     //Instantiate the index variable for the result
