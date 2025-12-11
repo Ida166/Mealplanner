@@ -29,7 +29,6 @@ Node* IngrediensIndtast_mainFunction(char hint[])
         } else{
         capitalize(ingrediens_input);
         head = tilfoj_ingrediens_til_liste(ingrediens_input, head);
-
     }
     }
 
@@ -50,11 +49,10 @@ Node* tilfoj_ingrediens_til_liste(char *ingrediens_input, Node *head){
     //strcmp sammenligner to strings og retunerer 0 hvis stringsne er ens
     if(n == NULL)
     {
-        printf("Fejl: kunne ikke allokere hukommelse.\n");
+        printf("ERROR: memmory could not be allocated.\n");
         return head;
     }
 
-   
     strcpy(n->ingredient, ingrediens_input);
     //put noden i listen
     n->next = head; //n's næste felt er sat lig listen og indsættes derfor forrest i listen
@@ -69,7 +67,7 @@ void get_ingredient(char *ingrediens_input){
 }
 
 void print_list(Node *head){
-    printf("Ingredienser indtastet:\n");
+    printf("Ingrediens typed in:\n");
     //Looper igennem listen og printer ingredienserne
     while(head != NULL){
         printf("%s\n",head->ingredient);
@@ -90,8 +88,7 @@ void free_list(Node *head){
 void capitalize(char *ingrediens_input){
     //Konverterer det første bukstav til stort
     ingrediens_input[0] = toupper(ingrediens_input[0]);
-
-    
+ 
     int i = 1;
     while(ingrediens_input[i] != '\0'){
         //Tjekker om det resten af bukstaverne er med stort 

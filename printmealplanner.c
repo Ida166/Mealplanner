@@ -59,8 +59,8 @@ int print_mealplan(int breakfastResultArray[7], int lunchResultArray[7], int din
             fprintf(f, "%s, ", dinner.ingredient[j]);
         }
         fprintf(f, "Procedure: %s\"\n", dinner.procedure);  // newline at end of row
-
     }
+    
     fclose(f);
     return 0;
 }
