@@ -18,7 +18,7 @@ int main(){
     Node *IngredientsBreakfast = NULL;
     //Run the ingredient input function to fill out the list
     while(1){
-        IngredientsBreakfast = IngrediensIndtast_mainFunction("Morgenmad");
+        IngredientsBreakfast = IngrediensIndtast_mainFunction("breakfast");
         //Print the recipes based on the ingredients
         //Also get the user input and set breakfast result to that
         print_recipes(recipes_breakfast,10,IngredientsBreakfast,BreakfastResultArray);
@@ -34,7 +34,7 @@ int main(){
     int LunchResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
     Node *IngredientsLunch = NULL;
     while(1){
-        IngredientsLunch = IngrediensIndtast_mainFunction("Frokost");
+        IngredientsLunch = IngrediensIndtast_mainFunction("lunch");
         print_recipes(recipes_lunch,10,IngredientsLunch,LunchResultArray);
         if (LunchResultArray[0] != -1){
             break;
@@ -47,7 +47,7 @@ int main(){
     int DinnerResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
     Node *IngredientsDinner = NULL;
     while(1){    
-        IngredientsDinner = IngrediensIndtast_mainFunction("Aftensmad");
+        IngredientsDinner = IngrediensIndtast_mainFunction("dinner");
         print_recipes(recipes_dinner,10,IngredientsDinner,DinnerResultArray);
         if (DinnerResultArray[0] != -1){
             break;

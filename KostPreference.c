@@ -26,7 +26,7 @@ void listOptions() {
 	char input[100];
 
 	//Print intro text
-	printf("Choose the diet preferences you would like one at a time (type 'exit' when done)\n");
+	printf("Choose the diet preferences you would like one at a time (type 'go' when done)\n");
 	printf("Your optiens are:\n");
 	printf("- Type 0 for All diet types\n");
 	printf("- Type 1 for Vegetarian\n");
@@ -39,7 +39,7 @@ void listOptions() {
 			break;  // exit the loop immediately
 		}
 
-		printf("\nEnter your choosen diet prference or type exit: ");
+		printf("\nEnter your choosen diet prference or type go: ");
 
 		//Få fat på brugerens input via fgets 
 		if(!fgets(s,sizeof(s),stdin)){
@@ -51,7 +51,7 @@ void listOptions() {
 		input[strcspn(input, "\n")] = '\0';
 
 		// Check for exit
-		if (strcmp(input, "exit") == 0) { // if the user have typed exit it will break out of the loop
+		if (strcmp(input, "go") == 0) { // if the user have typed exit it will break out of the loop
 			break;
 		}
 

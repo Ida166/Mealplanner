@@ -16,13 +16,13 @@ Node* IngrediensIndtast_mainFunction(char hint[])
 
     //promt brugeren for ingredienser og gem dem i en liste.
     printf("_______________________________________________________________________\n\n");
-    printf("Write the ingrediens you like for %s (Type'exit' when you are finiched).\n",hint);
+    printf("Write the ingrediens you like for %s (Type 'go' when you are finiched).\n",hint);
     printf("_______________________________________________________________________\n");
 
     while(1)
     {
         get_ingredient(ingrediens_input);
-        if(strcmp(ingrediens_input, "exit") == 0){
+        if(strcmp(ingrediens_input, "go") == 0){
             if (head == NULL){
                 printf("[ERROR] - No ingredients were typed.\n\n");
             } else{
