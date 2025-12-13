@@ -60,13 +60,15 @@ int main(){
     fill_schedule(DinnerResultArray);
 
     //Print the recipes
-
+    printf("_____________\n\n");
+    printf("Your mealplan\n");
+    printf("_____________\n\n");
     for (int i = 0; i < 7; i++){
         printf("Dag: %d\n",i+1);
         printf("%s\n",recipes_breakfast[BreakfastResultArray[i]].name);
         printf("%s\n",recipes_lunch[LunchResultArray[i]].name);
         printf("%s\n",recipes_dinner[DinnerResultArray[i]].name);
-        printf("\n");
+        printf("______________________________\n\n");
     }
 
     print_mealplan(BreakfastResultArray, LunchResultArray, DinnerResultArray);
