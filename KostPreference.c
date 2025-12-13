@@ -13,7 +13,7 @@ const char *optionNames[] = {
 	"Vegan"
 };
 
-//insted of havwing i equal to 3 wich is hard codede do ths insted
+//insted of having it equal to 3 wich is hard codede do ths insted
 int dietPreferenceAmount = sizeof(optionNames)/sizeof(optionNames[0]);
 // maximum selections = number of diet options.
 int MAX_DIET_CHOICES = dietPreferenceAmount;  
