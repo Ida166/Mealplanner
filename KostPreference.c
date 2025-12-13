@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "KostPreference.h"
 
 //This array stores each diet preference the user selects fx [1, 2, ...]
@@ -50,8 +51,8 @@ void listOptions() {
 		strcpy(input, s); //copies input into s
 		input[strcspn(input, "\n")] = '\0';
 
-		// Check for exit
-		if (strcmp(input, "go") == 0) { // if the user have typed exit it will break out of the loop
+		// Check for go 
+		if (strcasecmp(input, "go") == 0) { // if the user have typed go it will break out of the loop
 			break;
 		}
 
@@ -59,8 +60,14 @@ void listOptions() {
 		char *p; 
 		int value = strtol(s, &p, 10);
 
+		//skips whitespace so if the user type 0 and tab before enter it is not invalid.
+		//After skipping, p points to the first non-whitespace character or '\0' if there is nothing else
+		while(isspace((unsigned char)*p)) {
+			p++;
+		}
+
 		// Validate input
-		if (p == s || *p != '\n' || value < 0 || value >= dietPreferenceAmount) {
+		if (p == s || *p != '\0' || value < 0 || value >= dietPreferenceAmount) {
 			printf("Invalid input\n");
 			continue;
 		}
