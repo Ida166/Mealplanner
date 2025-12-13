@@ -380,7 +380,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
         }
     }
 
-    printf("\nType in the number of the recipe to choose it (Type 'exit' when you are finiched)\n");
+    printf("\nType in the number of the recipe to choose it (Type 'exit' when you are finished)\n");
     int option;
     int arrayIndex = 0;
     
@@ -397,8 +397,15 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
         char compareText[] = "exit";
         int compResult = strcmp(inputText,compareText);
 
+
         if (compResult == 0){
-            break;
+            //If arrayIndex is at 1 then no recipes has been selected
+            if (arrayIndex == 1){
+                printf("No recipes has been selected\n");
+                continue;
+            }else{
+                break;
+            }
         }
 
         //Inputtet var ikke "done", så converter s til et int
@@ -408,7 +415,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
             p++;
         }
 
-        if (p == s || *p != '\0'){ // If no number was read or extra characters remain = invalid
+        if (p == s || *p != '\0' || option < 0 || option > recipesIndex-1){ // If no number was read or extra characters remain = invalid
             printf("Not a valid input, please type in the number of a recipe or exit when you are doene choosing recipes.\n");
         } else {
             result[arrayIndex] = results[option]; // Store selected recipe
