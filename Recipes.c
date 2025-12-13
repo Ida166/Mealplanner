@@ -358,8 +358,9 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
             }
         }
     }
-
-    printf("You can choose the following recipes: \n");
+    printf("____________________________________\n\n");
+    printf("You can choose the following recipes \n");
+    printf("____________________________________\n\n");
     int recipesIndex = 0;
     for (int i = 0;i<10;i++){
         if (results[i] != -1){
@@ -373,6 +374,7 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
                 printf("       - %s\n", current.ingredient[j]);
             }
             printf("       Procedure: %s\n", current.procedure);
+            printf("_______________________________________________________________________________________\n");
             printf("\n");
             recipesIndex++;
         }

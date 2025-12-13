@@ -15,8 +15,10 @@ Node* IngrediensIndtast_mainFunction(char hint[])
     char ingrediens_input[50];
 
     //promt brugeren for ingredienser og gem dem i en liste.
-
+    printf("_______________________________________________________________________\n\n");
     printf("Write the ingrediens you like for %s (Type'exit' when you are finiched).\n",hint);
+    printf("_______________________________________________________________________\n");
+
     while(1)
     {
         get_ingredient(ingrediens_input);

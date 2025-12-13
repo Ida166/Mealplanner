@@ -10,14 +10,15 @@ int userDietCount = 0;
 
 //Laver et seperat array til at give indexene navne. Vi kan muligvis lave options om til et struct
 
-int dietPreferenceAmount = 3;
 
-char optionNames[3][10] = {
+const char *optionNames[] = {
 	"All",
 	"Vegetarian",
 	"Vegan"
 };
 
+//insted of havwing i equal to 3 wich is hard codede do ths insted
+int dietPreferenceAmount =sizeof(optionNames)/sizeof(optionNames[0]);
 
 void listOptions() {
 
@@ -26,7 +27,10 @@ void listOptions() {
 
 	//Print intro text
 	printf("Choose the diet preferences you would like one at a time (type 'exit' when done)\n");
-	printf("Your optiens are: type 0 for All, type 1 for Vegetarian, and type 2 for Vegan\n");
+	printf("Your optiens are:\n");
+	printf("- Type 0 for All diet types\n");
+	printf("- Type 1 for Vegetarian\n");
+	printf("- Type 2 for Vegan\n");
 
 	while(1){
 		// Check if max choices reached
