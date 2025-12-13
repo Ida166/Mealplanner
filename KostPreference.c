@@ -4,13 +4,8 @@
 #include <ctype.h>
 #include "KostPreference.h"
 
-//This array stores each diet preference the user selects fx [1, 2, ...]
-int userDietChoices[MAX_DIET_CHOICES];
 //This integer stores how many preferences the user has chosen
 int userDietCount = 0;
-
-//Laver et seperat array til at give indexene navne. Vi kan muligvis lave options om til et struct
-
 
 const char *optionNames[] = {
 	"All",
@@ -19,7 +14,11 @@ const char *optionNames[] = {
 };
 
 //insted of havwing i equal to 3 wich is hard codede do ths insted
-int dietPreferenceAmount =sizeof(optionNames)/sizeof(optionNames[0]);
+int dietPreferenceAmount = sizeof(optionNames)/sizeof(optionNames[0]);
+// maximum selections = number of diet options.
+int MAX_DIET_CHOICES = dietPreferenceAmount;  
+//This array stores each diet preference the user selects fx [1, 2, ...] 
+int userDietChoices[dietPreferenceAmount]; // array sized dynamically, it adaps if we add more diet options
 
 void listOptions() {
 
@@ -28,7 +27,7 @@ void listOptions() {
 
 	//Print intro text
 	printf("Choose the diet preferences you would like one at a time (type 'go' when done)\n");
-	printf("Your optiens are:\n");
+	printf("Your options are:\n");
 	printf("- Type 0 for All diet types\n");
 	printf("- Type 1 for Vegetarian\n");
 	printf("- Type 2 for Vegan\n");
@@ -40,7 +39,7 @@ void listOptions() {
 			break;  // exit the loop immediately
 		}
 
-		printf("\nEnter your choosen diet prference or type go: ");
+		printf("\nEnter your chosen diet preference or type go: ");
 
 		//Få fat på brugerens input via fgets 
 		if(!fgets(s,sizeof(s),stdin)){
