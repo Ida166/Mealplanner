@@ -13,12 +13,8 @@ const char *optionNames[] = {
 	"Vegan"
 };
 
-//insted of having it equal to 3 wich is hard codede do ths insted
-int dietPreferenceAmount = sizeof(optionNames)/sizeof(optionNames[0]);
-// maximum selections = number of diet options.
-int MAX_DIET_CHOICES = dietPreferenceAmount;  
 //This array stores each diet preference the user selects fx [1, 2, ...] 
-int userDietChoices[dietPreferenceAmount]; // array sized dynamically, it adaps if we add more diet options
+int userDietChoices[MAX_DIET_CHOICES]; // array sized dynamically, it adaps if we add more diet options
 
 void listOptions() {
 
@@ -66,7 +62,7 @@ void listOptions() {
 		}
 
 		// Validate input
-		if (p == s || *p != '\0' || value < 0 || value >= dietPreferenceAmount) {
+		if (p == s || *p != '\0' || value < 0 || value >= MAX_DIET_CHOICES) {
 			printf("Invalid input\n");
 			continue;
 		}
