@@ -8,7 +8,6 @@
 //En struct der gør at vi kan gemme ingredienser og pointe videre til den næste. (linked lists) 
 //En struct er en datatype man selv kan definere
 
-
 Node* IngrediensIndtast_mainFunction(const char hint[])
 {
     Node *head = NULL; //Declares a pointer head der peger på en node struct. NULL initilieres den til så den ikke peger et sted hen endnu.
