@@ -1,4 +1,3 @@
-//
 #include "IngrediensIndtast.h"
 
 #ifndef RECIPES_H
