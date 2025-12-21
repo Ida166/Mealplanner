@@ -374,13 +374,13 @@ void print_recipes(Recipe arr[],int size,Node *IngredienList, int result[7]){
                 printf("       - %s\n", current.ingredient[j]);
             }
             printf("       Procedure: %s\n", current.procedure);
-            printf("_______________________________________________________________________________________\n");
-            printf("\n");
+            printf("_________________________________________________________________________________\n");
             recipesIndex++;
         }
     }
 
     printf("\nType in the number of the recipe to choose it (Type 'go' when you are finished)\n");
+    printf("_________________________________________________________________________________\n");
     int option;
     int arrayIndex = 0;
     

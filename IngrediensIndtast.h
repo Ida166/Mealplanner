@@ -7,7 +7,7 @@ typedef struct Node{
     struct Node *next; //pointer til næste node i den linkede liste
 }Node;
 
-Node* IngrediensIndtast_mainFunction(char hint[]);
+Node* IngrediensIndtast_mainFunction(const char hint[]);
 void get_ingredient(char *ingrediens_input);
 Node* tilfoj_ingrediens_til_liste(char *ingrediens_input, Node *head);
 void free_list(Node *head);

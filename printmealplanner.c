@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "Recipes.h" 
+#include "printmealplanner.h"  //Defines Meal struct
+#include "Recipes.h"
 
-
-int print_mealplan(int breakfastResultArray[7], int lunchResultArray[7], int dinnerResultArray[7]){
+int print_mealplan(Meal meals[], int mealCount){
     //åbner filen
     FILE *f = fopen("printmealplanner.csv", "w");
     if (!f){
@@ -10,58 +10,46 @@ int print_mealplan(int breakfastResultArray[7], int lunchResultArray[7], int din
         return 1;
     }
 
-    // Generer en overskrift
+    //Generate a headline
     fprintf(f, "Meal Plan Template\n");
 
-    // Generer Kolonneoverskrifter
-    fprintf(f, "Day;Breakfast;Lunch;Dinner\n");
+    //Generate columns headlines
+    fprintf(f, "Day;");
+    //Dynamic headers only prints columns for selected meals
+    for (int m = 0; m < mealCount; m++) {
+        if (meals[m].resultArray) {
+            fprintf(f, "%s;", meals[m].name);
+        }
+    }
+    fprintf(f, "\n");
 
-    // Dage i ugen
+    //Days
     const char *days[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", 
                            "Friday", "Saturday", "Sunday"};
-
-    //Fyld csv filen med opskrifterne
+    
+    //Fill the csv file with the recipes 
     for (int i = 0; i < 7; i++) {
-        Recipe breakfast = recipes_breakfast[breakfastResultArray[i]];
-        Recipe lunch = recipes_lunch[lunchResultArray[i]];
-        Recipe dinner = recipes_dinner[dinnerResultArray[i]];
         
-         // Day column
+         //Day column
         fprintf(f, "%s;", days[i]);
 
-        // Breakfast column
-        fprintf(f, "\"%s, Time: %d, Portions: %d, Calories: %d, ", breakfast.name, breakfast.time, breakfast.portion, breakfast.calories);
-        fprintf(f, "Ingredients: ");
-        for(int j = 0; j < breakfast.ingredient_count; j++) {
-            fprintf(f, "%s, ", breakfast.ingredient[j]);
-        }
-        fprintf(f, "Procedure: %s\"", breakfast.procedure);
-        
-            
-        // Add semicolon before moving to lunch
-        fprintf(f, ";");    
+        for (int m = 0; m < mealCount; m++) {
+            if (!meals[m].resultArray) continue;  //Skip unselected meals
 
-        // Lunch column
-        fprintf(f, "\"%s, Time: %d, Portions: %d, Calories: %d, ", lunch.name, lunch.time, lunch.portion, lunch.calories);
-        fprintf(f, "Ingredients: ");
-        for (int j = 0; j < lunch.ingredient_count; j++) {
-            fprintf(f, "%s, ", lunch.ingredient[j]);
-        }
-        fprintf(f, "Procedure: %s\"", lunch.procedure);
+            Recipe r = meals[m].recipes[meals[m].resultArray[i]];
 
-        // Add semicolon before moving to dinner
-        fprintf(f, ";"); 
+            fprintf(f, "\"%s, Time: %d, Portions: %d, Calories: %d, Ingredients: ",
+                    r.name, r.time, r.portion, r.calories);
 
-        // Dinner column
-        fprintf(f, "\"%s, Time: %d, Portions: %d, Calories: %d, ", dinner.name, dinner.time, dinner.portion, dinner.calories);
-        fprintf(f, "Ingredients: ");
-        for (int j = 0; j < dinner.ingredient_count; j++) {
-            fprintf(f, "%s, ", dinner.ingredient[j]);
+            for (int j = 0; j < r.ingredient_count; j++)
+                fprintf(f, "%s, ", r.ingredient[j]);
+
+            fprintf(f, "Procedure: %s\"", r.procedure);
+
+            fprintf(f, ";");  //column separator
         }
-        fprintf(f, "Procedure: %s\"\n", dinner.procedure);  // newline at end of row
+    fprintf(f, "\n"); //end of row
     }
-    
     fclose(f);
     return 0;
 }
-

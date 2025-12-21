@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "IngrediensIndtast.h"
 #include "KostPreference.h"
 #include "Recipes.h"
 #include "printmealplanner.h"
 
+//Fill schedule for any -1 indices
 void fill_schedule(int Arr[7]);
+//Handle meal input and selection
+void handle_meal(const char *mealName, Recipe recipes[], int resultArray[7]);
 
 int main(){
 
@@ -12,70 +16,76 @@ int main(){
     printf("___________________________________\n\n");
     listOptions();
 
-    //Instantiate the index variable for the result
-    int BreakfastResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
-    //Create a new ingredient list
-    Node *IngredientsBreakfast = NULL;
-    //Run the ingredient input function to fill out the list
-    while(1){
-        IngredientsBreakfast = IngrediensIndtast_mainFunction("breakfast");
-        //Print the recipes based on the ingredients
-        //Also get the user input and set breakfast result to that
-        print_recipes(recipes_breakfast,10,IngredientsBreakfast,BreakfastResultArray);
-        if (BreakfastResultArray[0] != -1){
-            break;
+    //Define all available meals
+    typedef struct {
+        const char *name;
+        Recipe *recipes;
+    } MealType;
+
+    MealType allMeals[] = {
+        {"Breakfast", recipes_breakfast},
+        {"Lunch",     recipes_lunch},
+        {"Dinner",    recipes_dinner}
+    };
+    int totalMeals = sizeof(allMeals) / sizeof(MealType);
+
+    //Dynamic arrays for user selections
+    int *mealResults[totalMeals];
+    for (int i = 0; i < totalMeals; i++) mealResults[i] = NULL;
+
+    //Ask which meals the user wants
+    for (int i = 0; i < totalMeals; i++) {
+        int want = 0;
+        printf("\n");
+        printf("_________________________________________________\n\n");
+        printf("Do you want to generate a mealplan for %s?\n", allMeals[i].name);
+        printf("_________________________________________________\n\n");
+        printf("Type 1 for yes or 0 for no: ");
+        scanf("%d", &want);
+
+        if (want) {
+            mealResults[i] = malloc(7 * sizeof(int));
+            for (int j = 0; j < 7; j++) mealResults[i][j] = -1;
+
+            handle_meal(allMeals[i].name, allMeals[i].recipes, mealResults[i]);
+            fill_schedule(mealResults[i]);
         }
     }
 
-    printf("\n");
-    //Now repeat for lunch and dinner (This could be a for loop frankly)
-
-    int LunchResult = 0;
-    int LunchResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
-    Node *IngredientsLunch = NULL;
-    while(1){
-        IngredientsLunch = IngrediensIndtast_mainFunction("lunch");
-        print_recipes(recipes_lunch,10,IngredientsLunch,LunchResultArray);
-        if (LunchResultArray[0] != -1){
-            break;
+    // Prepare array of selected meals for printing
+    Meal *mealsToPrint = malloc(totalMeals * sizeof(Meal));
+    int selectedCount = 0;
+    for (int i = 0; i < totalMeals; i++) {
+        if (mealResults[i] != NULL) {
+            mealsToPrint[selectedCount].name = allMeals[i].name;
+            mealsToPrint[selectedCount].recipes = allMeals[i].recipes;
+            mealsToPrint[selectedCount].resultArray = mealResults[i];
+            selectedCount++;
         }
     }
-
-    printf("\n");
-
-    int DinnerResult = 0;
-    int DinnerResultArray[7] = {-1,-1,-1,-1,-1,-1,-1};
-    Node *IngredientsDinner = NULL;
-    while(1){    
-        IngredientsDinner = IngrediensIndtast_mainFunction("dinner");
-        print_recipes(recipes_dinner,10,IngredientsDinner,DinnerResultArray);
-        if (DinnerResultArray[0] != -1){
-            break;
-        }
-    }
-    printf("\n");
-
-    fill_schedule(BreakfastResultArray);
-    fill_schedule(LunchResultArray);
-    fill_schedule(DinnerResultArray);
-
     //Print the recipes
+    printf("\n\n");
     printf("_____________\n\n");
     printf("Your mealplan\n");
     printf("_____________\n\n");
+    const char *days[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     for (int i = 0; i < 7; i++){
         printf("Dag: %d\n",i+1);
-        printf("%s\n",recipes_breakfast[BreakfastResultArray[i]].name);
-        printf("%s\n",recipes_lunch[LunchResultArray[i]].name);
-        printf("%s\n",recipes_dinner[DinnerResultArray[i]].name);
+        for (int m = 0; m < selectedCount; m++) {
+            printf("%s: %s\n", mealsToPrint[m].name,
+                   mealsToPrint[m].recipes[mealsToPrint[m].resultArray[i]].name);
+        }
         printf("______________________________\n\n");
     }
 
-    print_mealplan(BreakfastResultArray, LunchResultArray, DinnerResultArray);
+    // Print mealplan to CSV
+    print_mealplan(mealsToPrint, selectedCount);
 
-    free_list(IngredientsBreakfast);
-    free_list(IngredientsLunch);
-    free_list(IngredientsDinner);
+    // Free memory
+    for (int i = 0; i < totalMeals; i++){
+        free(mealResults[i]);
+    }
+    free(mealsToPrint);
 
     return 0;
 }
@@ -90,4 +100,21 @@ void fill_schedule(int Arr[7]){
         }
         i++;
     }
+}
+
+void handle_meal(const char *mealName, Recipe recipes[], int resultArray[7]) {
+    Node *ingredients = NULL;
+
+    while (1) {
+        ingredients = IngrediensIndtast_mainFunction(mealName);
+        print_recipes(recipes, 10, ingredients, resultArray);
+
+        if (resultArray[0] != -1)
+            break;
+
+        free_list(ingredients);
+        ingredients = NULL;
+    }
+
+    free_list(ingredients);
 }
